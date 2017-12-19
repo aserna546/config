@@ -1,0 +1,19 @@
+ ctrl-o goes back to the previous place you came from.
+ctrl-i goes foward to place you came from.
+<line Number> G goes to the the line number you typed.
+/<word> goes foward to the word specified.
+
+
+to find a matching parathesis press % operator on current cursor.
+
+section 4.4
+subsistute command :s/(word in line)/(new word inserted)
+ 4. To change every occurrence of a character string between two lines,
+     type   :#,#s/old/new/g    where #,# are the line numbers of the range
+                               of lines where the substitution is to be done.
+     Type   :%s/old/new/g      to change every occurrence in the whole file.
+     Type   :%s/old/new/gc     to find every occurrence in the whole file,
+                               with a prompt whether to substitute or not.
+
+
+o is to place a new line bellow current line in insert mode.

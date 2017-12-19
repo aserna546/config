@@ -1,0 +1,241 @@
+set nocompatible
+if $TERM_PROGRAM =~ "iTerm"
+    let &t_SI = "\<Esc>]50;CursorShape=1\x7" " Vertical bar in insert mode
+    let &t_EI = "\<Esc>]50;CursorShape=0\x7" " Block in normal mode
+endif
+set rtp+=/usr/local/opt/fzf
+syntax enable
+" mouse
+set mouse=a
+set ttyfast
+set showmatch
+set clipboard=unnamed
+set ts=2
+set sts=2
+set sw=2
+set autoindent
+"hi Search ctermbg=Brown ctermfg=Black
+set smartindent
+set smarttab
+set termguicolors
+set expandtab
+set updatetime=250
+set number
+set relativenumber
+set pastetoggle=<F2>
+set backspace=indent,eol,start
+set wildignore+=*.a,*.o
+set wildignore+=*.bmp,*.ico,*.jpg,*.png,*.gif
+set wildignore+=.DS_Store,.git,.hg,.svn
+set wildignore+=*.swp,*.tmp
+set laststatus=2
+filetype off
+" set the runtime path to include Vundle and initialize
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+" " alternatively, pass a path where Vundle should install plugins
+" "call vundle#begin('~/some/path/here')
+" " let Vundle manage Vundle, required
+Plugin 'VundleVim/Vundle.vim'
+
+"Editing files
+Plugin 'tpope/vim-surround'
+Plugin 'tomtom/tcomment_vim'
+"Themes
+Plugin 'vim-airline/vim-airline-themes'
+Plugin 'chriskempson/base16-vim'
+
+"Movement and finding stuff
+Plugin 'yuttie/comfortable-motion.vim'
+Plugin 'easymotion/vim-easymotion'
+Plugin 'junegunn/fzf.vim'
+Plugin 'ludovicchabant/vim-gutentags'
+Plugin 'lfv89/vim-interestingwords' 
+Plugin 'mileszs/ack.vim'
+
+"Language support and snippets
+Plugin 'vhda/verilog_systemverilog.vim'
+Plugin 'SirVer/ultisnips'
+Plugin 'honza/vim-snippets'
+
+"Completion stufff
+Plugin 'Valloric/YouCompleteMe'
+Plugin 'rdnetto/YCM-Generator', { 'branch': 'stable' }
+Plugin 'jiangmiao/auto-pairs'
+Plugin 'junegunn/vim-easy-align'
+
+"Appearance and visual
+Plugin 'airblade/vim-gitgutter'
+Plugin 'jistr/vim-nerdtree-tabs'
+Plugin 'bling/vim-bufferline'
+Plugin 'ryanoasis/vim-devicons'
+Plugin 'vim-airline/vim-airline'
+Plugin 'scrooloose/nerdtree'
+Plugin 'Xuyuanp/nerdtree-git-plugin'
+
+"Plugin 'tiagofumo/vim-nerdtree-syntax-highlight'
+" " All of your Plugins must be added before the following line
+call vundle#end()            " required
+filetype plugin indent on    " required
+"filetype plugin on
+" " Brief help
+" " :PluginList       - lists configured plugins
+" " :PluginInstall    - installs plugins; append `!` to update or just
+" :PluginUpdate
+" " :PluginSearch foo - searches for foo; append `!` to refresh local cache
+" " :PluginClean      - confirms removal of unused plugins; append `!` to
+" auto-approve removal
+" "
+" " see :h vundle for more details or wiki for FAQ
+
+"vim -intersting words usees leader k to highlight occuance of words and
+"leader K to clear them.
+
+"Color and visual stuff
+" colorscheme Tomorrow-Night
+colorscheme base16-default-dark
+let g:WebDevIconsUnicodeDecorateFolderNodes = 1
+let g:DevIconsEnableFoldersOpenClose = 1
+let NERDTreeChDirMode=2
+let g:airline_theme='base16_default'
+let g:airline_powerline_fonts = 1
+let g:airline#extensions#bufferline#enabled = 1
+let g:airline#extensions#ctrlp#color_template = 'visual'
+let g:airline#extensions#ctrlp#show_adjacent_modes = 1
+set completeopt-=preview
+"highlight Pmenu ctermfg=White
+" for vim demicons you need change iterms fount for non acci to some nerd font
+" in the profile settings.
+set encoding=utf8
+" set omnifunc=syntaxcomplete#Complete
+" utilsnips stuff
+let g:ycm_key_list_select_completion = ['<Down>']
+let g:ycm_key_list_previous_completion = ['<C-p>', '<Up>']
+let g:UltiSnipsExpandTrigger="<tab>"
+let g:UltiSnipsJumpForwardTrigger="<s-down>"
+let g:UltiSnipsJumpBackwardTrigger="<s-up>"
+
+
+" Key remapping stuff
+let mapleader = ','
+nnoremap <leader>w <c-w>
+nnoremap <leader>df :YcmCompleter GoToDefinition<CR>
+nnoremap <leader>bt :BTags<CR>
+" used to search at a specifc function declaration.
+nnoremap <leader>dd g<c-]>
+"NERDTreeTabToggle
+nnoremap <c-\> :NERDTreeToggle<CR>
+" nnoremap <leader>y :NERDTree %<CR>
+nnoremap <leader>cd :lcd %:h<CR>
+" go to vimrc in the current buffer.
+nnoremap <leader>v :e ~/.vimrc<CR>
+nnoremap <leader>r :so $MYVIMRC<CR>
+nnoremap <leader>M <C-W>\| <C-W>_
+nnoremap <leader>m <C-W>=
+" search highlight toggle
+nnoremap <silent> <leader>st :set hlsearch!<cr>
+nnoremap <C-t> :call Fzf_dev()<CR>
+nnoremap <C-p> :Files <C-R>=expand('%:h')<CR><CR>
+
+" Open Ack and put the cursor in the right position
+map <leader>g :Ack!
+xnoremap <Leader>a y:Ack! <C-r>=fnameescape(@")<CR><CR>
+" When you press <leader>r you can search and replace the selected text
+nnoremap <leader>h :Helptags<CR>
+nnoremap <leader>bu :Buffers<CR>
+map <leader>cc :botright cope<cr>
+map <leader>co ggVGy:tabnew<cr>:set syntax=qf<cr>pgg
+map <leader>n :cn<cr>
+map <leader>p :cp<cr>
+nnoremap <leader>t :tabnew<CR>
+
+
+"noremap <silent> <ScrollWheelDown> :call comfortable_motion#flick(50)<CR>
+"noremap <silent> <ScrollWheelUp>   :call comfortable_motion#flick(-50)<CR>
+"let g:comfortable_motion_friction = 100.0
+"let g:comfortable_motion_air_drag = 2.0
+"
+if executable('rg')
+    let g:ackprg = 'rg --vimgrep --no-heading'
+endif
+
+" neeed tree mamppings
+let g:NERDTreeIndicatorMapCustom = {
+    \ "Modified"  : "✹",
+    \ "Staged"    : "✚",
+    \ "Untracked" : "✭",
+    \ "Renamed"   : "➜",
+    \ "Unmerged"  : "═",
+    \ "Deleted"   : "✖",
+    \ "Dirty"     : "✗",
+    \ "Clean"     : "✔︎",
+    \ 'Ignored'   : '☒',
+    \ "Unknown"   : "?"
+    \ }
+
+
+"Easy tags
+
+
+" ycm stuff
+let g:ycm_seed_identifiers_with_syntax = 1
+let g:ycm_key_list_stop_completion = ['<ENTER>']
+" let g:EclimCompletionMethod = 'omnifunc'
+"let g:loaded_youcompleteme = 1
+let g:ycm_add_preview_to_completeopt = 1
+let g:ycm_autoclose_preview_window_after_insertion = 1
+" comfortmotion
+
+" Augmenting Ag command using fzf#vim#with_preview function
+"   * fzf#vim#with_preview([[options], preview window, [toggle keys...]])
+"     * For syntax-highlighting, Ruby and any of the following tools are required:
+"       - Highlight: http://www.andre-simon.de/doku/highlight/en/highlight.php
+"       - CodeRay: http://coderay.rubychan.de/
+"       - Rouge: https://github.com/jneen/rouge
+"
+"   :Ag  - Start fzf with hidden preview window that can be enabled with "?" key
+"   :Ag! - Start fzf in fullscreen and display the preview window above
+command! -bang -nargs=* Ag
+  \ call fzf#vim#ag(<q-args>,
+  \                 <bang>0 ? fzf#vim#with_preview('up:60%')
+  \                         : fzf#vim#with_preview('right:50%:hidden', '?'),
+  \                 <bang>0)
+
+" Similarly, we can apply it to fzf#vim#grep. To use ripgrep instead of ag:
+command! -bang -nargs=* Rg
+  \ call fzf#vim#grep(
+  \   'rg --column --line-number --no-heading --color=always '.shellescape(<q-args>), 1,
+  \   <bang>0 ? fzf#vim#with_preview('up:60%')
+  \           : fzf#vim#with_preview('right:50%:hidden', '?'),
+  \   <bang>0)
+
+" Files + devicons
+function! Fzf_dev()
+  function! s:files()
+    let files = split(system($FZF_DEFAULT_COMMAND), '\n')
+    return s:prepend_icon(files)
+  endfunction
+
+  function! s:prepend_icon(candidates)
+    let result = []
+    for candidate in a:candidates
+      let filename = fnamemodify(candidate, ':p:t')
+      let icon = WebDevIconsGetFileTypeSymbol(filename, isdirectory(filename))
+      call add(result, printf("%s %s", icon, candidate))
+    endfor
+
+    return result
+  endfunction
+
+  function! s:edit_file(item)
+    let parts = split(a:item, ' ')
+    let file_path = get(parts, 1, '')
+    execute 'silent e' file_path
+endfunction
+
+  call fzf#run({
+        \ 'source': <sid>files(),
+        \ 'sink':   function('s:edit_file'),
+        \ 'options': '-m -x +s',
+        \ 'down':    '40%' })
+endfunction
