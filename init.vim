@@ -6,6 +6,7 @@ Plug 'tomtom/tcomment_vim'
 "Themes
 Plug 'vim-airline/vim-airline-themes'
 Plug 'chriskempson/base16-vim'
+Plug 'tomasr/molokai'
 
 "Movement and finding stuff
 Plug 'yuttie/comfortable-motion.vim'
@@ -89,7 +90,9 @@ filetype plugin indent on    " required
 
 "Color and visual stuff
 " colorscheme Tomorrow-Night
-colorscheme base16-default-dark
+" colorscheme base16-default-dark
+colorscheme Molokai
+let g:rehash256 = 1
 let g:WebDevIconsUnicodeDecorateFolderNodes = 1
 let g:DevIconsEnableFoldersOpenClose = 1
 let NERDTreeChDirMode=2
@@ -100,9 +103,12 @@ let g:airline#extensions#bufferline#enabled = 1
 "Tags
 let g:easytags_async = 1
 let g:easytags_dynamic_files = 2
-
+"
 " Use deoplete.
 let g:deoplete#enable_at_startup = 1
+let g:deoplete#ignore_sources = {}
+let g:deoplete#ignore_sources._ = ['tag']
+
 "python 2 path
 let g:deoplete#sources#jedi#python_path = '/usr/local/bin/python2'
 "Python 3 path
@@ -158,6 +164,7 @@ nnoremap <leader>m <C-W>=
 nnoremap <silent> <leader>st :set hlsearch!<cr>
 nnoremap <C-t> :call Fzf_dev()<CR>
 nnoremap <C-p> :Files <C-R>=expand('%:h')<CR><CR>
+map <F12> :so tags.vim<CR>
 
 " Open Ack and put the cursor in the right position
 map <leader>ga :Ack!
