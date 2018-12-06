@@ -1,5 +1,6 @@
 alias ls="ls -G"
 alias brlist="fbr"
+alias vim="nvim"
 
 bind 'set show-all-if-ambiguous on'
 # bind 'TAB:menu-complete'
@@ -20,6 +21,20 @@ bind -m vi-insert '"\C-k": kill-modeline'
 
 export PATH=$PATH:~/.bash/bin
 export EDITOR='nvim'
+
+# export THEME=$HOME/.bash/themes/agnoster-bash/agnoster.bash
+# if [[ -f $THEME ]]; then
+#     # export DEFAULT_USER=`whoami`
+#     source $THEME
+# fi
+#
+# prompt_context() {
+#     local user=`whoami`
+#
+#     if [[ $USER != $DEFAULT_USER || -n $SSH_CLIENT ]]; then
+#         prompt_segment black default "$USER"
+#     fi
+#   }
 
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
 export FZF_DEFAULT_OPS="--extended"
